@@ -1,0 +1,92 @@
+html
+{
+    margin: 0px;
+    height: 100%;
+}
+
+body
+{
+    margin: 0px;
+	background-color: #333333;
+	font-family: Verdana;
+	font-size: 20px;
+	color: white;
+	text-align: center;
+	height: 100%;
+}
+
+.content
+{
+    width: 1000px;
+    height: 100%;
+    background-color: #777777;
+    margin: auto;
+}
+
+header
+{
+    display: block;
+    font-size: 32px;
+    padding: 30px;
+}
+
+.fakeButton
+{
+    display: inline-block;
+    padding: 5px;
+    text-decoration: none;
+    color: white;
+    background-color: #222222;
+}
+
+.fakeButton:hover
+{
+    background-color: #444444;
+}
+
+thead, tbody { display: inline-block; }
+
+tbody {
+    height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: left;
+}
+
+tr:hover
+{
+    background-color: #555555;
+}
+
+#Fields
+{
+    width:80%;
+    float: left;
+    display: block;
+}
+
+#AIFields p
+{
+    width: 14%;
+}
+
+#PlayerFields a
+{
+    width: 14%;
+}
+
+#AIWell
+{
+    width:10%;
+    float: left;
+    display: block;
+    font-size: 200%;
+}
+
+#PlayerWell
+{
+    width:10%;
+    float: left;
+    display: block;
+    font-size: 200%;
+}

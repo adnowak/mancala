@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Mancala</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" content="text/css"/>
+</head>
+<body>
+<div class="content">
+    <div th:if="!${game.isFinished()}" id="board">
+        <aside id="AIWell">
+            <p class="fakeButton" href="/" th:text="${game.getPlayer1().getWell().getValue()}"></p>
+        </aside>
+        <div id="Fields">
+            <div id="AIFields">
+                <p class="fakeButton" id="ai5" href="/" th:text="${game.getPlayer1().getFields().get(5).getValue()}"></p>
+                <p class="fakeButton" id="ai4" href="/" th:text="${game.getPlayer1().getFields().get(4).getValue()}"></p>
+                <p class="fakeButton" id="ai3" href="/" th:text="${game.getPlayer1().getFields().get(3).getValue()}"></p>
+                <p class="fakeButton" id="ai2" href="/" th:text="${game.getPlayer1().getFields().get(2).getValue()}"></p>
+                <p class="fakeButton" id="ai1" href="/" th:text="${game.getPlayer1().getFields().get(1).getValue()}"></p>
+                <p class="fakeButton" id="ai0" href="/" th:text="${game.getPlayer1().getFields().get(0).getValue()}"></p>
+            </div>
+            <div id="PlayerFields">
+                <a class="fakeButton" id="p0" href="/play?id=0" th:text="${game.getPlayer0().getFields().get(0).getValue()}"></a>
+                <a class="fakeButton" id="p1" href="/play?id=1" th:text="${game.getPlayer0().getFields().get(1).getValue()}"></a>
+                <a class="fakeButton" id="p2" href="/play?id=2" th:text="${game.getPlayer0().getFields().get(2).getValue()}"></a>
+                <a class="fakeButton" id="p3" href="/play?id=3" th:text="${game.getPlayer0().getFields().get(3).getValue()}"></a>
+                <a class="fakeButton" id="p4" href="/play?id=4" th:text="${game.getPlayer0().getFields().get(4).getValue()}"></a>
+                <a class="fakeButton" id="p5" href="/play?id=5" th:text="${game.getPlayer0().getFields().get(5).getValue()}"></a>
+            </div>
+        </div>
+        <aside id="PlayerWell">
+            <p class="fakeButton" href="/" th:text="${game.getPlayer0().getWell().getValue()}"></p>
+        </aside>
+        <div style="clear:both;"/>
+    </div>
+    <div th:if="${game.isFinished()}" id="gameOverNav">
+        <span>Game over,
+            <span th:if="${game.getScore()>0}">You've won</span>
+            <span th:if="${game.getScore()<0}">You've lost</span>
+            <span th:if="${game.getScore()==0}">it's a draw</span>!
+        </span>
+        <a class="fakeButton" href="/">Play again</a>
+    </div>
+</div>
+</body>
+</html>
