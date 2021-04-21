@@ -13,15 +13,9 @@ public class Game {
 
     public Game(Player player0, Player player1) {
         this.player0 = player0;
+        this.player0.setMaximizing(true);
         this.player1 = player1;
-
-        if(new Random().nextInt(1)==1){
-            try {
-                makeAIChoice();
-            } catch (AllFieldsEmptyException e) {
-                e.printStackTrace();
-            }
-        }
+        this.player1.setMaximizing(false);
     }
 
     public Game(Game base){
@@ -39,7 +33,7 @@ public class Game {
         elements.addAll(player1.getFields());
 
         boolean capture = false;
-        if (value % elements.size() < 6 && elements.get((fieldIndex + value) % elements.size()).getValue() == 0 && elements.get(12-((fieldIndex + value) % elements.size())).getValue() != 0){
+        if (value !=0 && (value+fieldIndex) % elements.size() < 6 && elements.get((fieldIndex + value) % elements.size()).getValue() == 0 && elements.get(12-((fieldIndex + value) % elements.size())).getValue() != 0){
             capture = true;
         }
 
@@ -98,7 +92,7 @@ public class Game {
         elements.addAll(player0.getFields());
 
         boolean capture = false;
-        if (value % elements.size() < 6 && elements.get((chosenIndex + value) % elements.size()).getValue() == 0 && elements.get(12-((chosenIndex + value) % elements.size())).getValue() != 0){
+        if (value !=0 && (value+chosenIndex) % elements.size() < 6 && elements.get((chosenIndex + value) % elements.size()).getValue() == 0 && elements.get(12-((chosenIndex + value) % elements.size())).getValue() != 0){
             capture = true;
         }
 

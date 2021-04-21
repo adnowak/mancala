@@ -13,8 +13,8 @@ public class MancalaController {
 
     @GetMapping("/")
     public String home(Model model) {
-        Player player = new Player(Game.getInstance().getPlayer0().getChoiceHeuristic(), true);
-        Game.setInstance(new Game(player, new Player(Game.getInstance().getPlayer1().getChoiceHeuristic(), false)));
+        Player player = new Player(Game.getInstance().getPlayer0().getChoiceHeuristic());
+        Game.setInstance(new Game(player, new Player(Game.getInstance().getPlayer1().getChoiceHeuristic())));
         model.addAttribute("game", Game.getInstance());
         return "index";
     }
@@ -23,7 +23,6 @@ public class MancalaController {
     public String play(@RequestParam Integer id, Model model) {
         Game.getInstance().playField(id);
         model.addAttribute("game", Game.getInstance());
-        System.out.println(Game.getInstance().isFinished());
         return "index";
     }
 }

@@ -13,8 +13,8 @@ class MancalaApplicationTests {
 
 	@Test
 	void aiComparision(){
-		Player player = new Player(new AlphaBetaChoiceHeuristic(8), true);
-		Game game = new Game(player, new Player(new AlphaBetaChoiceHeuristic(8), false));
+		Player player = new Player(new AlphaBetaChoiceHeuristic(10));
+		Game game = new Game(player, new Player(new AlphaBetaChoiceHeuristic(8)));
 		while (!game.isFinished()){
 			try{
 				game.playField(player.makeChoice(game));

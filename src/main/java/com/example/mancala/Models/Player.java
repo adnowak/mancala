@@ -11,7 +11,7 @@ public class Player {
     private ChoiceHeuristic choiceHeuristic;
     private boolean isMaximizing;
 
-    public Player(ChoiceHeuristic choiceHeuristic, boolean isMaximizing) {
+    public Player(ChoiceHeuristic choiceHeuristic) {
         fields = new ArrayList<>();
         fields.add(new Field());
         fields.add(new Field());
@@ -21,7 +21,6 @@ public class Player {
         fields.add(new Field());
         well = new Well();
         this.choiceHeuristic = choiceHeuristic;
-        this.isMaximizing = isMaximizing;
     }
 
     public Player(Player base){
@@ -63,5 +62,9 @@ public class Player {
 
     public boolean isMaximizing() {
         return isMaximizing;
+    }
+
+    public void setMaximizing(boolean maximizing) {
+        isMaximizing = maximizing;
     }
 }
