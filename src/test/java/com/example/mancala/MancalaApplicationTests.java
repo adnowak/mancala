@@ -9,15 +9,24 @@ import com.example.mancala.Models.Player;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Random;
+
 class MancalaApplicationTests {
+
 
 	@Test
 	void aiComparision(){
-		Player player = new Player(new AlphaBetaChoiceHeuristic(10));
-		Game game = new Game(player, new Player(new AlphaBetaChoiceHeuristic(8)));
+		Player player = new Player(new AlphaBetaChoiceHeuristic(8));
+		Game game = new Game(player, new Player(new AlphaBetaChoiceHeuristic(8)), true);
 		while (!game.isFinished()){
 			try{
-				game.playField(player.makeChoice(game));
+				if(!game.isStarted()&&game.isRandomFirstMove()){
+					game.playField(new Random().nextInt(6));
+					game.setStarted(true);
+				}
+				else {
+					game.playField(player.makeChoice(game));
+				}
 			}
 			catch (AllFieldsEmptyException gameOver){
 				break;

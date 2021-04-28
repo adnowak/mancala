@@ -15,7 +15,7 @@ public class MancalaApplication {
 
 	public static void main(String[] args) {
 		Player player = new Player((ChoiceHeuristic) null);
-		Game game = new Game(player, new Player(new MinMaxChoiceHeuristic(6)));
+		Game game = new Game(player, new Player(new MinMaxChoiceHeuristic(6)), false);
 		Game.setInstance(game);
 		SpringApplication app = new SpringApplication(MancalaApplication.class);
 		app.setDefaultProperties(Collections

@@ -44,20 +44,6 @@ header
     background-color: #444444;
 }
 
-thead, tbody { display: inline-block; }
-
-tbody {
-    height: 500px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    text-align: left;
-}
-
-tr:hover
-{
-    background-color: #555555;
-}
-
 #Fields
 {
     width:80%;

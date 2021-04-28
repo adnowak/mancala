@@ -8,19 +8,33 @@ import java.util.Random;
 public class Game {
     private Player player0;
     private Player player1;
+    private boolean isStarted;
+    private boolean randomFirstMove;
 
     private static Game instance;
 
-    public Game(Player player0, Player player1) {
+    public Game(Player player0, Player player1, boolean randomFirstMove) {
         this.player0 = player0;
         this.player0.setMaximizing(true);
         this.player1 = player1;
         this.player1.setMaximizing(false);
+        this.randomFirstMove = randomFirstMove;
     }
 
     public Game(Game base){
         this.player0 = new Player(base.getPlayer0());
         this.player1 = new Player(base.getPlayer1());
+        this.randomFirstMove = base.randomFirstMove;
+    }
+
+    public static Game getRestartedGame(Game base){
+        Player player0 = new Player(base.getPlayer0().getChoiceHeuristic());
+        player0.setMaximizing(true);
+        Player player1 = new Player(base.getPlayer1().getChoiceHeuristic());
+        player1.setMaximizing(false);
+        boolean randomFirstMove = base.randomFirstMove;
+
+        return new Game(player0, player1, randomFirstMove);
     }
 
     public void playField(int fieldIndex) {
@@ -183,5 +197,17 @@ public class Game {
 
     public boolean isFinished(){
         return (player0.getNonemptyIndexes().size() == 0) && (player0.getNonemptyIndexes().size() == 0);
+    }
+
+    public boolean isStarted() {
+        return isStarted;
+    }
+
+    public void setStarted(boolean started) {
+        isStarted = started;
+    }
+
+    public boolean isRandomFirstMove() {
+        return randomFirstMove;
     }
 }

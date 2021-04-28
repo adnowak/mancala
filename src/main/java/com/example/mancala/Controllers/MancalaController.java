@@ -14,7 +14,7 @@ public class MancalaController {
     @GetMapping("/")
     public String home(Model model) {
         Player player = new Player(Game.getInstance().getPlayer0().getChoiceHeuristic());
-        Game.setInstance(new Game(player, new Player(Game.getInstance().getPlayer1().getChoiceHeuristic())));
+        Game.setInstance(Game.getRestartedGame(Game.getInstance()));
         model.addAttribute("game", Game.getInstance());
         return "index";
     }
