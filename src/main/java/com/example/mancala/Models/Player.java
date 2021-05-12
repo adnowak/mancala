@@ -1,5 +1,6 @@
 package com.example.mancala.Models;
 
+import com.example.mancala.AI.BoardEvaluationHeuristic;
 import com.example.mancala.AI.ChoiceHeuristic;
 import com.example.mancala.Exceptions.AllFieldsEmptyException;
 
@@ -9,9 +10,11 @@ public class Player {
     private ArrayList<Field> fields;
     private Well well;
     private ChoiceHeuristic choiceHeuristic;
+    private BoardEvaluationHeuristic evaluationHeuristic;
     private boolean isMaximizing;
+    private int movesDone;
 
-    public Player(ChoiceHeuristic choiceHeuristic) {
+    public Player(ChoiceHeuristic choiceHeuristic, BoardEvaluationHeuristic evaluationHeuristic) {
         fields = new ArrayList<>();
         fields.add(new Field());
         fields.add(new Field());
@@ -21,6 +24,8 @@ public class Player {
         fields.add(new Field());
         well = new Well();
         this.choiceHeuristic = choiceHeuristic;
+        this.evaluationHeuristic = evaluationHeuristic;
+        this.movesDone = 0;
     }
 
     public Player(Player base){
@@ -30,7 +35,9 @@ public class Player {
         }
         well = new Well(base.getWell());
         this.choiceHeuristic = base.choiceHeuristic;
+        this.evaluationHeuristic = base.evaluationHeuristic;
         this.isMaximizing = base.isMaximizing;
+        this.movesDone = base.movesDone;
     }
 
     public ArrayList<Field> getFields() {
@@ -53,11 +60,16 @@ public class Player {
     }
 
     public int makeChoice(Game game) throws AllFieldsEmptyException {
+        movesDone++;
         return choiceHeuristic.makeChoice(game, this);
     }
 
     public ChoiceHeuristic getChoiceHeuristic() {
         return choiceHeuristic;
+    }
+
+    public BoardEvaluationHeuristic getEvaluationHeuristic() {
+        return evaluationHeuristic;
     }
 
     public boolean isMaximizing() {
@@ -66,5 +78,9 @@ public class Player {
 
     public void setMaximizing(boolean maximizing) {
         isMaximizing = maximizing;
+    }
+
+    public int getMovesDone() {
+        return movesDone;
     }
 }

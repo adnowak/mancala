@@ -3,12 +3,12 @@ package com.example.mancala.Models;
 import com.example.mancala.Exceptions.AllFieldsEmptyException;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class Game {
     private Player player0;
     private Player player1;
     private boolean isStarted;
+    private boolean isFinished;
     private boolean randomFirstMove;
 
     private static Game instance;
@@ -19,18 +19,20 @@ public class Game {
         this.player1 = player1;
         this.player1.setMaximizing(false);
         this.randomFirstMove = randomFirstMove;
+        this.isFinished = false;
     }
 
     public Game(Game base){
         this.player0 = new Player(base.getPlayer0());
         this.player1 = new Player(base.getPlayer1());
         this.randomFirstMove = base.randomFirstMove;
+        this.isFinished = base.isFinished;
     }
 
     public static Game getRestartedGame(Game base){
-        Player player0 = new Player(base.getPlayer0().getChoiceHeuristic());
+        Player player0 = new Player(base.getPlayer0().getChoiceHeuristic(), base.getPlayer0().getEvaluationHeuristic());
         player0.setMaximizing(true);
-        Player player1 = new Player(base.getPlayer1().getChoiceHeuristic());
+        Player player1 = new Player(base.getPlayer1().getChoiceHeuristic(), base.getPlayer1().getEvaluationHeuristic());
         player1.setMaximizing(false);
         boolean randomFirstMove = base.randomFirstMove;
 
@@ -196,7 +198,7 @@ public class Game {
     }
 
     public boolean isFinished(){
-        return (player0.getNonemptyIndexes().size() == 0) && (player0.getNonemptyIndexes().size() == 0);
+        return isFinished || (player0.getNonemptyIndexes().size() == 0) && (player0.getNonemptyIndexes().size() == 0);
     }
 
     public boolean isStarted() {
@@ -209,5 +211,18 @@ public class Game {
 
     public boolean isRandomFirstMove() {
         return randomFirstMove;
+    }
+
+    public int getWinnerMovesDone(){
+        if(getScore()>0){
+            return player0.getMovesDone();
+        }
+        else {
+            return player1.getMovesDone();
+        }
+    }
+
+    public void finish(){
+        isFinished = true;
     }
 }

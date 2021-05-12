@@ -19,7 +19,7 @@ public class RandomChoiceHeuristic extends ChoiceHeuristic{
         }
 
         if(nonemptyFields.size()==0){
-            throw new AllFieldsEmptyException();
+            throw new AllFieldsEmptyException(game.getScore());
         }
 
         int index = new Random().nextInt(nonemptyFields.size());
