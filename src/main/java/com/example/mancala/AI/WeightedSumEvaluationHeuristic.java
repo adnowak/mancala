@@ -4,6 +4,12 @@ import com.example.mancala.Models.Field;
 import com.example.mancala.Models.Game;
 
 public class WeightedSumEvaluationHeuristic extends BoardEvaluationHeuristic{
+    private int scoreWeight;
+
+    public WeightedSumEvaluationHeuristic(int scoreWeight) {
+        this.scoreWeight = scoreWeight;
+    }
+
     @Override
     public int getBoardEvaluation(Game game) {
         int player0Sum = 0;
@@ -15,6 +21,6 @@ public class WeightedSumEvaluationHeuristic extends BoardEvaluationHeuristic{
         for (Field field: game.getPlayer1().getFields()) {
             player1Sum += field.getValue();
         }
-        return 2*game.getScore()+player0Sum-player1Sum;
+        return scoreWeight*game.getScore()+player0Sum-player1Sum;
     }
 }

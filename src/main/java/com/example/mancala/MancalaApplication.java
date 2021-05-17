@@ -13,7 +13,7 @@ public class MancalaApplication {
 
 	public static void main(String[] args) {
 		Player player = new Player((ChoiceHeuristic) null, null);
-		Game game = new Game(player, new Player(new AlphaBetaChoiceHeuristic(8), new WeightedSumEvaluationHeuristic()), false);
+		Game game = new Game(player, new Player(new MinMaxChoiceHeuristic(8), new WeightedSumEvaluationHeuristic(2)), false);
 		Game.setInstance(game);
 		SpringApplication app = new SpringApplication(MancalaApplication.class);
 		app.setDefaultProperties(Collections

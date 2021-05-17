@@ -19,10 +19,10 @@ public class MinMaxChoiceHeuristic extends ChoiceHeuristic{
     }
 
     private int minmax(Game game, int depth, boolean maximizingPlayer, BoardEvaluationHeuristic evaluationHeuristic) throws AllFieldsEmptyException {
-        int bestChoice = 0;
         if(depth == 0){
             return evaluationHeuristic.getBoardEvaluation(game);
         }
+        int bestChoice;
 
         if(maximizingPlayer){
             int maxEval = -10000;
@@ -49,9 +49,8 @@ public class MinMaxChoiceHeuristic extends ChoiceHeuristic{
                 }
             }
 
-            if(depth == 1) {
-                MinMaxChoiceHeuristic.choice = bestChoice;
-            }
+            MinMaxChoiceHeuristic.choice = bestChoice;
+
             return maxEval;
         }
         else {
@@ -78,9 +77,8 @@ public class MinMaxChoiceHeuristic extends ChoiceHeuristic{
                     continue;
                 }
             }
-            if(depth == 1) {
-                MinMaxChoiceHeuristic.choice = bestChoice;
-            }
+            MinMaxChoiceHeuristic.choice = bestChoice;
+
             return minEval;
         }
     }
